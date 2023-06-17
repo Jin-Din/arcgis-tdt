@@ -1,29 +1,78 @@
 import { PluginOption, defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import AutoImport from "unplugin-auto-import/vite";
 import { resolve } from "path";
 import dts from "vite-plugin-dts";
 import { obfuscator } from "rollup-obfuscator";
 import obfuscatorPlugin from "vite-plugin-javascript-obfuscator";
 export default defineConfig(({ command, mode }) => {
   return {
+    base: "/",
+    server: {
+      host: "0.0.0.0",
+    },
+    resolve: {
+      alias: {
+        "@": resolve(__dirname, "src"),
+        "@public": resolve(__dirname, "public"),
+        "@assets": resolve(__dirname, "src/assets"),
+        "@libs": resolve(__dirname, "src/libs"),
+        "@views": resolve(__dirname, "src/views"),
+        "@utils": resolve(__dirname, "src/utils"),
+        "@hooks": resolve(__dirname, "src/hooks"),
+        "@router": resolve(__dirname, "src/router"),
+        "@store": resolve(__dirname, "src/store"),
+        "@api": resolve(__dirname, "src/api"),
+      },
+    },
     plugins: [
+      vue(),
       dts({
         insertTypesEntry: true,
         copyDtsFiles: false,
       }),
-      codeObfuscator(command === "build"),
+      AutoImport({
+        imports: [
+          "vue",
+          "vue-router",
+          "pinia",
+
+          // custom
+          {
+            axios: [
+              // default imports
+              ["default", "axios"], // import { default as axios } from 'axios',
+            ],
+          },
+        ],
+        // Auto import for module exports under directories
+        // by default it only scan one level of modules under the directory
+        // 本项目中的文件夹
+        dirs: [
+          "./src/hooks/**",
+          "./src/utils/**",
+          // './composables' // only root modules
+          // './composables/**', // all nested modules
+          // ...
+        ],
+
+        //生成 `auto-import.d.ts` 全局声明
+        dts: "src/types/auto-import.d.ts",
+      }),
+      // codeObfuscator(command === "build"),
       // codeObfuscatorPlugin(command === "build"),
     ],
     build: {
       lib: {
         // 入口指向组件库入口模块
-        entry: resolve(__dirname, "./lib/tdtLayer.ts"),
+        entry: resolve(__dirname, "src/libs/tianDiTuLayer.ts"),
         name: "arcgis-tdt",
         // 构建生成的文件名，与package.json中配置一致
         fileName: "index",
       },
       rollupOptions: {
         // 确保外部化处理那些你不想打包进库的依赖
-        external: ["vue", "@arcgis/core"],
+        external: ["vue", "@arcgis"],
 
         output: {
           // format: 'es', // 默认es，可选 'amd' 'cjs' 'es' 'iife' 'umd' 'system'

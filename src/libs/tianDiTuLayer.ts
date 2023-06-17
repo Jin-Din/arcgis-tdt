@@ -1,6 +1,13 @@
 import TileInfo from "@arcgis/core/layers/support/TileInfo";
 import WebTileLayer from "@arcgis/core/layers/WebTileLayer";
+import TileLayer from "@arcgis/core/layers/TileLayer";
+import SpatialReference from "@arcgis/core/geometry/SpatialReference";
 import Extent from "@arcgis/core/geometry/Extent";
+import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
+import BaseTileLayer from "@arcgis/core/layers/BaseTileLayer";
+import Color from "@arcgis/core/Color";
+import esriRequest from "@arcgis/core/request";
+import esriConfig from "@arcgis/core/config";
 
 // type tdtLayerType = "img_c" | "cia_c" | "img_w" | "cia_w" | "vec_c" | "vec_w" | "cva_c" | "cva_w" | "img_c_4326" | "cia_c_4326";
 type tdtMapId = "img" | "cia" | "vec" | "cva";
