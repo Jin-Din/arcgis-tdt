@@ -13,6 +13,7 @@ export default defineConfig(({ command, mode }) => {
     },
     resolve: {
       alias: {
+        "@lib": resolve(__dirname, "lib"),
         "@": resolve(__dirname, "src"),
         "@public": resolve(__dirname, "public"),
         "@assets": resolve(__dirname, "src/assets"),
@@ -65,14 +66,14 @@ export default defineConfig(({ command, mode }) => {
     build: {
       lib: {
         // 入口指向组件库入口模块
-        entry: resolve(__dirname, "src/libs/tianDiTuLayer.ts"),
+        entry: resolve(__dirname, "lib/index.ts"),
         name: "arcgis-tdt",
         // 构建生成的文件名，与package.json中配置一致
         fileName: "index",
       },
       rollupOptions: {
         // 确保外部化处理那些你不想打包进库的依赖
-        external: ["vue", "@arcgis"],
+        external: ["vue", "@arcgis/core"],
 
         output: {
           // format: 'es', // 默认es，可选 'amd' 'cjs' 'es' 'iife' 'umd' 'system'

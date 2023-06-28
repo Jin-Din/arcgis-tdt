@@ -13,7 +13,7 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { useTdtSource } from "./libs/tianDiTuLayer";
+import { useTdtSource } from "@lib/index";
 import MapView from "@arcgis/core/views/MapView"; //2d 地图
 import SceneView from "@arcgis/core/views/SceneView"; //3d 地图
 import Map from "@arcgis/core/Map";
@@ -23,10 +23,12 @@ import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 import TileLayer from "@arcgis/core/layers/TileLayer";
 import SpatialReference from "@arcgis/core/geometry/SpatialReference";
 import ElevationLayer from "@arcgis/core/layers/ElevationLayer";
+import VectorTileLayer from "@arcgis/core/layers/VectorTileLayer";
 import esriConfig from "@arcgis/core/config";
 import { useSyncMap } from "./libs/syncMap";
-
-const tdt = useTdtSource(); //"a5158125c0ae822a92852177362ad808"
+import mapboxStyle3857 from "./data/mapboxStyle3857";
+import mapboxStyle4490 from "./data/mapboxStyle4490";
+const tdt = useTdtSource("3b659aefecf870a8390d6c77b8a4b8aa"); //"a5158125c0ae822a92852177362ad808"
 // esriConfig.request.trustedServers?.push("localhost:5173");
 
 const map2d = ref();
@@ -46,8 +48,16 @@ onMounted(() => {
     url: "http://10.61.128.135:6080/arcgis/rest/services/image_xaql/MapServer",
   });
 
+  const vectorTileLayer = new VectorTileLayer({
+    // style,
+    // arcgis vector tile 3857
+    // url: "https://jsapi.maps.arcgis.com/sharing/rest/content/items/75f4dfdff19e445395653121a95a85db/resources/styles/root.json",
+    // 天地图陕西 测试地址 3857 "http://124.115.223.53:7080/YouMapServer/rest/service/gonglu/VectorTileServer/styles/default-0.json",
+    style: mapboxStyle3857,
+    // style: mapboxStyle4490,
+  });
   const basemap = new BaseMap({
-    baseLayers: [tdt.img_c, tdt.cia_c],
+    baseLayers: [tdt.img_c_4490],
     // baseLayers: [tdt.img_c_,imglayer_4490],
   });
 
@@ -75,12 +85,14 @@ onMounted(() => {
       wkid: 4490,
     },
   });
+
   map = new Map({
     basemap,
-    // layers: [imglayer_4490],
+    // layers: [vectorTileLayer],
     ground: {
       layers: [chinaTerrainLayer],
     },
+
     // ground: "world-elevation",
   });
 
@@ -179,3 +191,4 @@ const handleAddTerrainLayer = () => {
   left: 0; */
 }
 </style>
+@lib/index ./data/mapboxStyle3857

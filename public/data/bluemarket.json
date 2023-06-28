@@ -1,0 +1,969 @@
+{
+  "metadata": {
+    "mapbox:autocomposite": true,
+    "mapbox:sdk-support": {
+      "js": "0.53.0"
+    },
+    "mapbox:type": "template"
+  },
+  "sources": {
+    "youmapDS": {
+      "tiles": ["http://210.74.129.81:8081/YouMapServer/rest/service/marketsupervisionApp/VectorTileServer/tile/{z}/{x}/{y}"],
+      "zoomOffset": 0,
+      "maxzoom": 16,
+      "type": "vector"
+    }
+  },
+  "light": {
+    "intensity": 0.45,
+    "color": "#fefefe",
+    "anchor": "viewport",
+    "position": [1.2, 180, 40]
+  },
+  "center": [110.20191493730027, 34.00303659837391],
+  "name": "bluemarket",
+  "sprite": "http://210.74.129.81:8081/YouMapServer/rest/service/marketsupervisionApp/VectorTileServer/bluemarket/sprites/sprite",
+  "layers": [
+    {
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "background-color": "rgba(67, 62, 62, 1)",
+        "background-opacity": 1
+      },
+      "id": "背景图层",
+      "type": "background"
+    },
+    {
+      "filter": ["all"],
+      "layout": {
+        "visibility": "visible"
+      },
+      "maxzoom": 18,
+      "paint": {
+        "fill-outline-color": "rgba(251, 251, 251, 0.26)",
+        "fill-pattern": "Land",
+        "fill-color": "rgba(20, 21, 21, 1)",
+        "fill-opacity": 0.85
+      },
+      "id": "省面纹理",
+      "source": "youmapDS",
+      "source-layer": "BouProv_py",
+      "type": "fill",
+      "minzoom": 2
+    },
+    {
+      "layout": {
+        "visibility": "none",
+        "line-cap": ["step", ["zoom"], "butt", 1, "butt", 12, "square"]
+      },
+      "metadata": {
+        "comment": ""
+      },
+      "maxzoom": 18,
+      "paint": {
+        "line-width": ["interpolate", ["linear"], ["zoom"], 5, 4, 18, 20],
+        "line-blur": ["interpolate", ["linear"], ["zoom"], 5, 2, 18, 5],
+        "line-color": "rgba(255, 255, 255, 1)"
+      },
+      "id": "省界线",
+      "source": "youmapDS",
+      "source-layer": "BouProv_pl",
+      "type": "line",
+      "minzoom": 2
+    },
+    {
+      "filter": ["all"],
+      "layout": {
+        "visibility": "none"
+      },
+      "metadata": {
+        "comment": ""
+      },
+      "maxzoom": 18,
+      "paint": {
+        "fill-outline-color": "rgba(255, 255, 255, 0)",
+        "fill-color": "rgba(17, 20, 40, 1)",
+        "fill-opacity": 0.9
+      },
+      "id": "区县面",
+      "source": "youmapDS",
+      "source-layer": "BouCounty_py",
+      "type": "fill",
+      "minzoom": 2
+    },
+    {
+      "filter": ["all"],
+      "layout": {
+        "visibility": "none"
+      },
+      "metadata": {
+        "comment": ""
+      },
+      "maxzoom": 18,
+      "paint": {
+        "fill-outline-color": "rgba(255, 255, 255, 0)",
+        "fill-color": "rgba(17, 20, 40, 1)",
+        "fill-opacity": 1
+      },
+      "id": "地市面",
+      "source": "youmapDS",
+      "source-layer": "BouCity_py",
+      "type": "fill",
+      "minzoom": 2
+    },
+    {
+      "filter": ["all"],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "maxzoom": 18,
+      "paint": {
+        "line-width": 3,
+        "line-color": "rgba(232, 59, 16, 1)"
+      },
+      "id": "乡镇界线",
+      "source": "youmapDS",
+      "source-layer": "BouTown_pl",
+      "type": "line",
+      "minzoom": 2
+    },
+    {
+      "filter": ["all"],
+      "layout": {
+        "visibility": "none"
+      },
+      "metadata": {
+        "comment": ""
+      },
+      "maxzoom": 18,
+      "paint": {
+        "fill-outline-color": "rgba(255, 255, 255, 0)",
+        "fill-color": "rgba(17, 20, 40, 1)",
+        "fill-opacity": 0.9
+      },
+      "id": "乡镇面",
+      "source": "youmapDS",
+      "source-layer": "BouTown_py",
+      "type": "fill",
+      "minzoom": 2
+    },
+    {
+      "filter": ["all"],
+      "layout": {
+        "visibility": "none"
+      },
+      "metadata": {
+        "comment": ""
+      },
+      "paint": {
+        "fill-color": [
+          "match",
+          ["get", "name"],
+          "沣东新城",
+          "rgba(246,0,60,0.4)",
+          "沣西新城",
+          "rgba(255,181,73,0.4)",
+          "秦汉新城",
+          "rgba(148, 245, 118, 0.4)",
+          "空港新城",
+          "rgba(59,154,156,0.4)",
+          "泾河新城",
+          "rgba(65,182,230,0.4)",
+          "#000000"
+        ]
+      },
+      "id": "西咸新区",
+      "source": "youmapDS",
+      "source-layer": "BouXixian_py",
+      "type": "fill"
+    },
+    {
+      "layout": {
+        "visibility": "none",
+        "text-field": "{name}",
+        "text-size": 19
+      },
+      "paint": {
+        "text-halo-color": "rgba(245, 118, 213, 0.54)",
+        "text-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 2
+      },
+      "id": "西咸新区点",
+      "source": "youmapDS",
+      "source-layer": "BouXixian_pt",
+      "type": "symbol",
+      "minzoom": 8.5
+    },
+    {
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-width": 3,
+        "line-color": "rgba(255, 255, 255, 1)"
+      },
+      "id": "西咸新区_轮廓",
+      "source": "youmapDS",
+      "source-layer": "BouXixian_pl",
+      "type": "line"
+    },
+    {
+      "filter": ["all"],
+      "layout": {
+        "visibility": "none"
+      },
+      "metadata": {
+        "comment": ""
+      },
+      "paint": {
+        "fill-color": "rgba(133, 245, 118, 0.3)"
+      },
+      "id": "秦岭保护区",
+      "source": "youmapDS",
+      "source-layer": "BouQinling_py",
+      "type": "fill"
+    },
+    {
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-width": 3,
+        "line-color": "rgba(255, 255, 255, 1)"
+      },
+      "id": "秦岭保护区_轮廓",
+      "source": "youmapDS",
+      "source-layer": "BouQinling_pl",
+      "type": "line"
+    },
+    {
+      "filter": ["all", ["==", "name", "西安国家民用航天产业基地"]],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "rgba(245, 118, 213, 0.54)"
+      },
+      "id": "航天产业基地",
+      "source": "youmapDS",
+      "source-layer": "BouKaifaqu_py",
+      "type": "fill"
+    },
+    {
+      "filter": ["all", ["==", "name", "西安国家民用航天产业基地"]],
+      "layout": {
+        "visibility": "none",
+        "text-field": "{name}"
+      },
+      "paint": {
+        "text-halo-color": "rgba(245, 118, 213, 0.54)",
+        "text-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 2
+      },
+      "id": "航天产业基地点",
+      "source": "youmapDS",
+      "source-layer": "BouKaifaqu_pt",
+      "type": "symbol",
+      "minzoom": 8.5
+    },
+    {
+      "filter": ["all", ["==", "name", "西安国家民用航天产业基地"]],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-width": 3,
+        "line-color": "rgba(255, 255, 255, 1)"
+      },
+      "id": "航天产业基地_轮廓",
+      "source": "youmapDS",
+      "source-layer": "BouKaifaqu_pl",
+      "type": "line"
+    },
+    {
+      "filter": ["all", ["==", "name", "渭北工业区"]],
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "fill-color": "rgba(245, 217, 118, 0.54)"
+      },
+      "id": "渭北工业区",
+      "source": "youmapDS",
+      "source-layer": "BouKaifaqu_py",
+      "type": "fill"
+    },
+    {
+      "filter": ["all", ["==", "name", "渭北工业区"]],
+      "layout": {
+        "visibility": "none",
+        "text-field": "{name}"
+      },
+      "paint": {
+        "text-halo-color": "rgba(245, 217, 118, 0.54)",
+        "text-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 2
+      },
+      "id": "渭北工业区_注记",
+      "source": "youmapDS",
+      "source-layer": "BouKaifaqu_pt",
+      "type": "symbol",
+      "minzoom": 8.5
+    },
+    {
+      "filter": ["all", ["==", "name", "渭北工业区"]],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-width": 3,
+        "line-color": "rgba(255, 255, 255, 1)"
+      },
+      "id": "渭北工业区_轮廓",
+      "source": "youmapDS",
+      "source-layer": "BouKaifaqu_pl",
+      "type": "line"
+    },
+    {
+      "filter": ["all", ["==", "name", "高新技术产业开发区"]],
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "fill-color": "rgba(118, 184, 245, 0.54)"
+      },
+      "id": "高新区",
+      "source": "youmapDS",
+      "source-layer": "BouKaifaqu_py",
+      "type": "fill"
+    },
+    {
+      "filter": ["all", ["==", "name", "高新技术产业开发区"]],
+      "layout": {
+        "visibility": "none",
+        "text-field": "{name}"
+      },
+      "paint": {
+        "text-halo-color": "rgba(118, 184, 245, 1)",
+        "text-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 2
+      },
+      "id": "高新区点",
+      "source": "youmapDS",
+      "source-layer": "BouKaifaqu_pt",
+      "type": "symbol",
+      "minzoom": 8.5
+    },
+    {
+      "filter": ["all", ["==", "name", "高新技术产业开发区"]],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-width": 3,
+        "line-color": "rgba(255, 255, 255, 1)"
+      },
+      "id": "高新区_轮廓",
+      "source": "youmapDS",
+      "source-layer": "BouKaifaqu_py",
+      "type": "line"
+    },
+    {
+      "filter": ["all"],
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "fill-color": [
+          "match",
+          ["get", "name"],
+          "高新区功能区",
+          "rgba(246,0,60,0.4)",
+          "经开区功能区",
+          "rgba(255,181,73,0.4)",
+          "空港新城功能区",
+          "rgba(148, 245, 118, 0.4)",
+          "港务区功能区",
+          "rgba(59,154,156,0.4)",
+          "能源经贸功能区",
+          "rgba(0,24,113,0.4)",
+          "浐灞生态区功能区",
+          "rgba(148, 245, 118, 0.4)",
+          "沣东新城功能区",
+          "rgba(80,193,233,0.4)",
+          "秦汉新城",
+          "rgba(122,87,209,0.4)",
+          "#000000"
+        ]
+      },
+      "id": "自贸区",
+      "source": "youmapDS",
+      "source-layer": "BouZMQFunc_py",
+      "type": "fill"
+    },
+    {
+      "layout": {
+        "text-optional": false,
+        "visibility": "none",
+        "text-field": "{name}",
+        "text-offset": [0, -2],
+        "text-keep-upright": true,
+        "text-size": 18,
+        "text-allow-overlap": false,
+        "text-ignore-placement": false,
+        "icon-size": 0.5,
+        "text-font": ["Microsoft YaHei Regular", ""]
+      },
+      "paint": {
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-color": "rgba(252, 166, 27, 1)",
+        "text-halo-width": 1
+      },
+      "id": "自贸区点",
+      "source": "youmapDS",
+      "source-layer": "BouZMQ_pt",
+      "type": "symbol"
+    },
+    {
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-width": 3,
+        "line-color": "rgba(255, 255, 255, 1)"
+      },
+      "id": "自贸区_轮廓",
+      "source": "youmapDS",
+      "source-layer": "BouZMQ_pl",
+      "type": "line"
+    },
+    {
+      "filter": ["all"],
+      "layout": {
+        "visibility": "none"
+      },
+      "metadata": {
+        "comment": ""
+      },
+      "paint": {
+        "fill-color": [
+          "match",
+          ["get", "name"],
+          "高新区功能区",
+          "rgba(246,0,60,0.4)",
+          "经开区功能区",
+          "rgba(255,181,73,0.4)",
+          "空港新城功能区",
+          "rgba(148, 245, 118, 0.4)",
+          "港务区功能区",
+          "rgba(59,154,156,0.4)",
+          "能源经贸功能区",
+          "rgba(0,24,113,0.4)",
+          "浐灞生态区功能区",
+          "rgba(148, 245, 118, 0.4)",
+          "沣东新城功能区",
+          "rgba(80,193,233,0.4)",
+          "秦汉新城",
+          "rgba(122,87,209,0.4)",
+          "#000000"
+        ]
+      },
+      "id": "自贸区功能区",
+      "source": "youmapDS",
+      "source-layer": "BouZMQFunc_py",
+      "type": "fill"
+    },
+    {
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-width": 3,
+        "line-color": "rgba(255, 255, 255, 1)"
+      },
+      "id": "自贸区功能区_轮廓",
+      "source": "youmapDS",
+      "source-layer": "BouZMQFunc_py",
+      "type": "line"
+    },
+    {
+      "filter": ["all"],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "metadata": {
+        "comment": ""
+      },
+      "maxzoom": 18,
+      "paint": {
+        "line-width": ["interpolate", ["linear"], ["get", ""], 5, 3, 18, 20],
+        "line-opacity": 1,
+        "line-color": "rgba(255, 255, 255, 1)"
+      },
+      "id": "地市界线",
+      "source": "youmapDS",
+      "source-layer": "BouCity_pl",
+      "type": "line",
+      "minzoom": 2
+    },
+    {
+      "filter": ["all"],
+      "layout": {
+        "visibility": "none",
+        "line-cap": "square",
+        "line-join": "bevel"
+      },
+      "maxzoom": 18,
+      "paint": {
+        "line-width": 2,
+        "line-color": "rgba(248, 248, 251, 1)"
+      },
+      "id": "区县界线",
+      "source": "youmapDS",
+      "source-layer": "BouCounty_pl",
+      "type": "line",
+      "minzoom": 2
+    },
+    {
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-width": 10,
+        "line-color": [
+          "case",
+          ["boolean", ["==", ["get", "type"], "天然气"], false],
+          "#66CCFF",
+          ["boolean", ["==", ["get", "type"], "氢气"], false],
+          "#CCFFFF",
+          ["boolean", ["==", ["get", "type"], "乙炔"], false],
+          "#FFFF99",
+          "green"
+        ]
+      },
+      "id": "压力管道",
+      "source": "youmapDS",
+      "source-layer": "geo_pipeline",
+      "type": "line"
+    },
+
+    {
+      "layout": {
+        "text-optional": false,
+        "visibility": "none",
+        "text-field": "{name}",
+        "text-offset": [0, -2],
+        "text-keep-upright": true,
+        "text-allow-overlap": false,
+        "text-ignore-placement": false,
+        "icon-size": 0.5,
+        "text-font": ["Microsoft YaHei Regular", ""]
+      },
+      "maxzoom": 16,
+      "paint": {
+        "text-halo-color": "rgba(22, 92, 102, 1)",
+        "text-color": "rgba(112, 188, 201, 1)",
+        "text-halo-width": 1
+      },
+      "id": "POI_乡镇",
+      "source": "youmapDS",
+      "source-layer": "BouTown_pt",
+      "type": "symbol",
+      "minzoom": 5.6
+    },
+    {
+      "layout": {
+        "visibility": "none",
+        "text-field": "{name}",
+        "text-offset": [0, -2],
+        "icon-size": 0.5,
+        "text-font": ["Microsoft YaHei Regular", ""]
+      },
+      "maxzoom": 13,
+      "paint": {
+        "text-halo-color": "rgba(22, 92, 102, 1)",
+        "text-color": "rgba(53, 239, 250, 1)",
+        "text-halo-width": 1
+      },
+      "id": "POI_区县",
+      "source": "youmapDS",
+      "source-layer": "BouCounty_pt",
+      "type": "symbol",
+      "minzoom": 5.6
+    },
+    {
+      "layout": {
+        "visibility": "none",
+        "text-field": "{name}",
+        "text-offset": [0, -2],
+        "text-allow-overlap": false,
+        "icon-size": 0.5,
+        "text-font": ["Microsoft YaHei Regular", ""]
+      },
+      "maxzoom": 9,
+      "paint": {
+        "text-halo-color": "rgba(22, 92, 102, 1)",
+        "text-color": "rgba(53, 239, 250, 1)",
+        "text-halo-width": 1
+      },
+      "id": "POI_地市",
+      "source": "youmapDS",
+      "source-layer": "BouCity_pt",
+      "type": "symbol",
+      "minzoom": 5.8
+    },
+    {
+      "layout": {
+        "visibility": "none",
+        "icon-size": 1.5,
+        "icon-image": "企业1"
+      },
+      "id": "企业法人",
+      "source": "youmapDS",
+      "source-layer": "geo_gongkuangshangmao",
+      "type": "symbol"
+    },
+    {
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "heatmap-color": [
+          "interpolate",
+          ["linear"],
+          ["heatmap-density"],
+          0,
+          "rgba(0,0,0,0)",
+          0.2,
+          "rgb(0,0,255)",
+          0.4,
+          "rgb(0,255,0)",
+          0.6,
+          "rgb(255,255,0)",
+          0.8,
+          "rgb(239,138,98)",
+          1,
+          "rgb(255,0,0)"
+        ],
+        "heatmap-opacity": ["interpolate", ["linear"], ["zoom"], 2, 1, 14, 0.8, 16.5, 0],
+        "heatmap-weight": ["interpolate", ["linear"], ["get", "mag"], 0, 0, 6, 1],
+        "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 0, 1, 9, 3],
+        "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 0, 2, 4, 12, 8, 14, 10, 16]
+      },
+      "id": "企业法人_热度图",
+      "source": "youmapDS",
+      "source-layer": "geo_gongkuangshangmao",
+      "type": "heatmap"
+    },
+    {
+      "layout": {
+        "visibility": "none",
+        "icon-size": 1.5,
+        "icon-image": "铲车"
+      },
+      "id": "专用机动车辆",
+      "source": "youmapDS",
+      "source-layer": "geo_zhuanyongjidongcheliang",
+      "type": "symbol"
+    },
+    {
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "heatmap-color": [
+          "interpolate",
+          ["linear"],
+          ["heatmap-density"],
+          0,
+          "rgba(0,0,0,0)",
+          0.2,
+          "rgb(0,0,255)",
+          0.4,
+          "rgb(0,255,0)",
+          0.6,
+          "rgb(255,255,0)",
+          0.8,
+          "rgb(239,138,98)",
+          1,
+          "rgb(255,0,0)"
+        ],
+        "heatmap-opacity": ["interpolate", ["linear"], ["zoom"], 2, 1, 14, 0.8, 16.5, 0],
+        "heatmap-weight": ["interpolate", ["linear"], ["get", "mag"], 0, 0, 6, 1],
+        "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 0, 1, 9, 3],
+        "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 0, 2, 4, 12, 8, 14, 10, 16]
+      },
+      "id": "专用机动车辆_热度图",
+      "source": "youmapDS",
+      "source-layer": "geo_zhuanyongjidongcheliang",
+      "type": "heatmap"
+    },
+    {
+      "layout": {
+        "visibility": "none",
+        "icon-size": 1.5,
+        "icon-image": "索道"
+      },
+      "id": "客运索道",
+      "source": "youmapDS",
+      "source-layer": "geo_keyunsuodao",
+      "type": "symbol"
+    },
+    {
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "heatmap-color": [
+          "interpolate",
+          ["linear"],
+          ["heatmap-density"],
+          0,
+          "rgba(0,0,0,0)",
+          0.2,
+          "rgb(0,0,255)",
+          0.4,
+          "rgb(0,255,0)",
+          0.6,
+          "rgb(255,255,0)",
+          0.8,
+          "rgb(239,138,98)",
+          1,
+          "rgb(255,0,0)"
+        ],
+        "heatmap-opacity": ["interpolate", ["linear"], ["zoom"], 2, 1, 14, 0.8, 16.5, 0],
+        "heatmap-weight": ["interpolate", ["linear"], ["get", "mag"], 0, 0, 6, 1],
+        "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 0, 1, 9, 3],
+        "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 0, 2, 4, 12, 8, 14, 10, 16]
+      },
+      "id": "客运索道_热度图",
+      "source": "youmapDS",
+      "source-layer": "geo_keyunsuodao",
+      "type": "heatmap"
+    },
+    {
+      "layout": {
+        "visibility": "none",
+        "icon-size": 1.5,
+        "icon-image": "起重机"
+      },
+      "id": "起重机械",
+      "source": "youmapDS",
+      "source-layer": "geo_youlesheshi",
+      "type": "symbol"
+    },
+    {
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "heatmap-color": [
+          "interpolate",
+          ["linear"],
+          ["heatmap-density"],
+          0,
+          "rgba(0,0,0,0)",
+          0.2,
+          "rgb(0,0,255)",
+          0.4,
+          "rgb(0,255,0)",
+          0.6,
+          "rgb(255,255,0)",
+          0.8,
+          "rgb(239,138,98)",
+          1,
+          "rgb(255,0,0)"
+        ],
+        "heatmap-opacity": ["interpolate", ["linear"], ["zoom"], 2, 1, 14, 0.8, 16.5, 0],
+        "heatmap-weight": ["interpolate", ["linear"], ["get", "mag"], 0, 0, 6, 1],
+        "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 0, 1, 9, 3],
+        "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 0, 2, 4, 12, 8, 14, 10, 16]
+      },
+      "id": "起重机械_热度图",
+      "source": "youmapDS",
+      "source-layer": "geo_youlesheshi",
+      "type": "heatmap"
+    },
+    {
+      "layout": {
+        "visibility": "none",
+        "icon-size": 1.5,
+        "icon-image": "游乐场"
+      },
+      "id": "游乐设施",
+      "source": "youmapDS",
+      "source-layer": "geo_youlesheshi",
+      "type": "symbol"
+    },
+    {
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "heatmap-color": [
+          "interpolate",
+          ["linear"],
+          ["heatmap-density"],
+          0,
+          "rgba(0,0,0,0)",
+          0.2,
+          "rgb(0,0,255)",
+          0.4,
+          "rgb(0,255,0)",
+          0.6,
+          "rgb(255,255,0)",
+          0.8,
+          "rgb(239,138,98)",
+          1,
+          "rgb(255,0,0)"
+        ],
+        "heatmap-opacity": ["interpolate", ["linear"], ["zoom"], 2, 1, 14, 0.8, 16.5, 0],
+        "heatmap-weight": ["interpolate", ["linear"], ["get", "mag"], 0, 0, 6, 1],
+        "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 0, 1, 9, 3],
+        "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 0, 2, 4, 12, 8, 14, 10, 16]
+      },
+      "id": "游乐设施_热度图",
+      "source": "youmapDS",
+      "source-layer": "geo_youlesheshi",
+      "type": "heatmap"
+    },
+    {
+      "layout": {
+        "visibility": "none",
+        "icon-size": 1.5,
+        "icon-image": "锅炉"
+      },
+      "id": "锅炉",
+      "source": "youmapDS",
+      "source-layer": "geo_guolu",
+      "type": "symbol"
+    },
+    {
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "heatmap-color": [
+          "interpolate",
+          ["linear"],
+          ["heatmap-density"],
+          0,
+          "rgba(0,0,0,0)",
+          0.2,
+          "rgb(0,0,255)",
+          0.4,
+          "rgb(0,255,0)",
+          0.6,
+          "rgb(255,255,0)",
+          0.8,
+          "rgb(239,138,98)",
+          1,
+          "rgb(255,0,0)"
+        ],
+        "heatmap-opacity": ["interpolate", ["linear"], ["zoom"], 2, 1, 14, 0.8, 16.5, 0],
+        "heatmap-weight": ["interpolate", ["linear"], ["get", "mag"], 0, 0, 6, 1],
+        "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 0, 1, 9, 3],
+        "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 0, 2, 4, 12, 8, 14, 10, 16]
+      },
+      "id": "锅炉_热度图",
+      "source": "youmapDS",
+      "source-layer": "geo_guolu",
+      "type": "heatmap"
+    },
+    {
+      "layout": {
+        "visibility": "none",
+        "icon-size": 1.2,
+        "icon-image": "摄像头"
+      },
+      "id": "明厨亮灶",
+      "source": "youmapDS",
+      "source-layer": "geo_canguan",
+      "type": "symbol"
+    },
+    {
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "heatmap-color": [
+          "interpolate",
+          ["linear"],
+          ["heatmap-density"],
+          0,
+          "rgba(0,0,0,0)",
+          0.2,
+          "rgb(0,0,255)",
+          0.4,
+          "rgb(0,255,0)",
+          0.6,
+          "rgb(255,255,0)",
+          0.8,
+          "rgb(239,138,98)",
+          1,
+          "rgb(255,0,0)"
+        ],
+        "heatmap-opacity": ["interpolate", ["linear"], ["zoom"], 2, 1, 14, 0.8, 16.5, 0],
+        "heatmap-weight": ["interpolate", ["linear"], ["get", "mag"], 0, 0, 6, 1],
+        "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 0, 1, 9, 3],
+        "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 0, 2, 4, 12, 8, 14, 10, 16]
+      },
+      "id": "明厨亮灶_热度图",
+      "source": "youmapDS",
+      "source-layer": "geo_canguan",
+      "type": "heatmap"
+    },
+    {
+      "layout": {
+        "visibility": "none",
+        "icon-size": 1.2,
+        "icon-image": "升降电梯"
+      },
+      "id": "电梯设备",
+      "source": "youmapDS",
+      "source-layer": "geo_dianti",
+      "type": "symbol"
+    },
+    {
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "heatmap-color": [
+          "interpolate",
+          ["linear"],
+          ["heatmap-density"],
+          0,
+          "rgba(0,0,0,0)",
+          0.2,
+          "rgb(0,0,255)",
+          0.4,
+          "rgb(0,255,0)",
+          0.6,
+          "rgb(255,255,0)",
+          0.8,
+          "rgb(239,138,98)",
+          1,
+          "rgb(255,0,0)"
+        ],
+        "heatmap-opacity": ["interpolate", ["linear"], ["zoom"], 2, 1, 14, 0.8, 16.5, 0],
+        "heatmap-weight": ["interpolate", ["linear"], ["get", "mag"], 0, 0, 6, 1],
+        "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 0, 1, 9, 3],
+        "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 0, 2, 4, 12, 8, 14, 10, 16]
+      },
+      "id": "电梯设备_热度图",
+      "source": "youmapDS",
+      "source-layer": "geo_dianti",
+      "type": "heatmap"
+    }
+  ],
+  "zoom": 7.65,
+  "glyphs": "http://210.74.129.81:8081/YouMapServer/rest/service/marketsupervisionApp/VectorTileServer/fonts/{fontstack}/{range}.pbf",
+  "version": 8
+}
